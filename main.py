@@ -26,9 +26,9 @@ CHANNEL_USERNAME = "@capnhatkeoo"         # kênh bắt buộc
 GROUP_USERNAME = "@CongDongVTV24h"        # nhóm duyệt rút
 
 # phần thưởng mỗi lượt mời
-REWARD_PER_REF = 360
+REWARD_PER_REF = 3.600
 # mức rút tối thiểu
-MIN_WITHDRAW = 10000
+MIN_WITHDRAW =36.000
 
 DB_PATH = "data.db"
 
