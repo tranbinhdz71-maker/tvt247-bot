@@ -170,9 +170,11 @@ async def confirm_join_callback(update: Update, context: ContextTypes.DEFAULT_TY
         text = "⚠️ Bạn chưa tham gia đủ kênh và nhóm yêu cầu.\n\nVui lòng tham gia cả 2 rồi bấm lại ✅ Đã Tham Gia."
         # gửi lại nút mở link + confirm
         keyboard = [
-            [InlineKeyboardButton("🔗 Mở Kênh", url=f"https://t.me/{CHANNEL_USERNAME.lstrip('@')}")],
-            [InlineKeyboardButton("🔗 Mở Nhóm", url=f"https://t.me/{GROUP_USERNAME.lstrip('@')}")],
-            [InlineKeyboardButton("✅ Đã Tham Gia", callback_data="confirm_join")],
+           [
+        [InlineKeyboardButton("🔗 Mở Kênh", url=f"https://t.me/{CHANNEL_USERNAME.lstrip('@')}")],
+        [InlineKeyboardButton("🔗 Mở Nhóm", url=f"https://t.me/{GROUP_USERNAME.lstrip('@')}")],
+        [InlineKeyboardButton("✅ Đã Tham Gia", callback_data="confirm_join")],
+        [InlineKeyboardButton("🔙 Quay Lại Menu", callback_data="menu")]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
         try:
