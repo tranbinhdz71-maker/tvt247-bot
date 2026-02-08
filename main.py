@@ -145,7 +145,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("🔗 Mở Kênh", url=f"https://t.me/{CHANNEL_USERNAME.lstrip('@')}")],
         [InlineKeyboardButton("🔗 Mở Nhóm", url=f"https://t.me/{GROUP_USERNAME.lstrip('@')}")],
         [InlineKeyboardButton("✅ Đã Tham Gia", callback_data="confirm_join")],
-    ]
+        [InlineKeyboardButton("🔙 Quay Lại Menu", callback_data="menu")],
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(text, parse_mode="HTML", reply_markup=reply_markup)
 
