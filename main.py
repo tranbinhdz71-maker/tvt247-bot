@@ -24,6 +24,8 @@ REWARD_PER_REF = 3600
 MIN_WITHDRAW = 36000
 DB_PATH = "data.db"
 
+ADMIN_ID = 7509928631  # 👈 ID của bạn (Kỳ Vọng)
+
 # ===============================
 # 🧩 DATABASE
 # ===============================
@@ -78,10 +80,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             pass
 
     text = (
-        "🎉 <b>Chào mừng bạn đến với Bot Casino36!</b>\n\n"
         "🔔 <b>Sân chơi kiếm tiền uy tín xanh chín</b>\n"
-        "🎁 Mời bạn bè nhận <b>3.600đ</b> / bạn\n"
-        "💵 Rút thưởng từ <b>36.000đ</b> / duyệt 24/7\n"
+        f"🎁 Mời bạn bè nhận <b>{REWARD_PER_REF:,}đ</b> / bạn\n"
+        f"💵 Rút thưởng từ <b>{MIN_WITHDRAW:,}đ</b> / duyệt 24/7\n"
         "👉 Gõ <b>/start</b> để khởi động nào!\n\n"
         "🎯 Để tiếp tục và nhận thưởng, hãy tham gia đầy đủ:\n"
         f"📢 Kênh: {CHANNEL_USERNAME}\n"
@@ -102,7 +103,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # ===============================
 async def confirm_join(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
-    await query.answer()
+    await query.answer("⏳ Đang xác minh...")
     user_id = query.from_user.id
     username = query.from_user.username or ""
     db_ensure_user(user_id, username)
@@ -153,7 +154,7 @@ async def get_link(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     user_id = query.from_user.id
     link = f"https://t.me/{BOT_USERNAME}?start=ref{user_id}"
-    text = f"🔗 Link mời của bạn:\n{link}\n\nChia sẻ link này để nhận +3.600đ cho mỗi người tham gia!"
+    text = f"🔗 Link mời của bạn:\n{link}\n\nChia sẻ link này để nhận +{REWARD_PER_REF:,}đ cho mỗi người tham gia!"
     keyboard = [[InlineKeyboardButton("🔙 Quay Lại Menu", callback_data="menu")]]
     await query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(keyboard))
 
@@ -199,8 +200,6 @@ async def menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # ===============================
 # 📢 LỆNH /thongbao — chỉ admin
 # ===============================
-ADMIN_ID = 123456789  # 👈 Thay bằng user_id thật của bạn
-
 async def thongbao(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     if user_id != ADMIN_ID:
